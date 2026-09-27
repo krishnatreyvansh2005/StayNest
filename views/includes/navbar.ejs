@@ -1,0 +1,99 @@
+<style>
+    .navbar-brand {
+        font-weight: 700;
+        font-size: 1.35rem;
+        letter-spacing: -0.5px;
+    }
+
+    .brand-icon {
+        margin-right: 0.4rem;
+    }
+
+    .btn-search {
+        background-color: #fe424d;
+        color: #fff;
+        border-radius: 25px;
+        padding: 0.45rem 1rem;
+        border: none;
+    }
+
+    .btn-search:hover {
+        background-color: #e63946;
+        color: #fff;
+    }
+
+    .btn-search i {
+        margin-right: 0.4rem;
+    }
+
+    .nav-link {
+        margin-left: 0.25rem;
+    }
+</style>
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="/listings">
+            <i class="fa-solid fa-house brand-icon"></i>
+            StayNest
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+            <div class="navbar-nav">
+                <a class="nav-link" href="/listings">Explore Stays</a>
+            </div>
+
+            <div class="navbar-nav ms-auto">
+                <form class="d-flex" role="search">
+                    <input
+                        class="form-control me-2"
+                        type="search"
+                        placeholder="Where do you want to stay?"
+                    />
+                    <button class="btn btn-search" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Search
+                    </button>
+                </form>
+            </div>
+
+            <div class="navbar-nav ms-auto">
+
+                <a class="nav-link" href="/listings/new">
+                    List your property
+                </a>
+
+                <% if (typeof currUser === 'undefined' || !currUser) { %>
+
+                    <a class="nav-link" href="/signup">
+                        <b>Sign up</b>
+                    </a>
+
+                    <a class="nav-link" href="/login">
+                        <b>Log in</b>
+                    </a>
+
+                <% } else { %>
+
+                    <a class="nav-link" href="/logout">
+                        <b>Log out</b>
+                    </a>
+
+                <% } %>
+
+            </div>
+
+        </div>
+    </div>
+</nav>

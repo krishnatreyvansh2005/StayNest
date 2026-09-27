@@ -1,0 +1,246 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .edit-page {
+        max-width: 850px;
+        margin: 40px auto 70px;
+    }
+
+    .edit-header {
+        margin-bottom: 30px;
+    }
+
+    .edit-header h2 {
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .edit-header p {
+        color: #6b7280;
+        margin: 0;
+    }
+
+    .edit-card {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .form-label {
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        padding: 11px 13px;
+        border: 1px solid #d1d5db;
+    }
+
+    .form-control:focus {
+        border-color: #222;
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+    }
+
+    textarea.form-control {
+        min-height: 130px;
+        resize: vertical;
+    }
+
+    .current-image-box {
+        background: #f8f9fa;
+        border-radius: 14px;
+        padding: 15px;
+        margin-bottom: 22px;
+    }
+
+    .current-image-box p {
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+
+    .current-image {
+        width: 220px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 12px;
+        display: block;
+    }
+
+    .upload-note {
+        font-size: 13px;
+        color: #6b7280;
+        margin-top: 7px;
+    }
+
+    .edit-btn {
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        font-weight: 600;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .edit-btn:hover {
+        opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+        .edit-page {
+            margin: 25px 15px 50px;
+        }
+
+        .edit-card {
+            padding: 20px;
+        }
+
+        .current-image {
+            width: 100%;
+            height: 200px;
+        }
+    }
+</style>
+
+<div class="edit-page">
+
+    <div class="edit-header">
+        <h2>Edit your stay</h2>
+        <p>Update your property details and keep your listing fresh.</p>
+    </div>
+
+    <div class="edit-card">
+
+        <form
+            method="POST"
+            action="/listings/<%= listing._id %>?_method=PUT"
+            novalidate
+            class="needs-validation"
+            enctype="multipart/form-data"
+        >
+
+            <!-- Title -->
+            <div class="mb-4">
+                <label for="title" class="form-label">Listing title</label>
+
+                <input
+                    id="title"
+                    name="listing[title]"
+                    value="<%= listing.title %>"
+                    type="text"
+                    class="form-control"
+                    placeholder="Give your stay a name"
+                    required
+                >
+            </div>
+
+            <!-- Description -->
+            <div class="mb-4">
+                <label for="description" class="form-label">Description</label>
+
+                <textarea
+                    id="description"
+                    name="listing[description]"
+                    class="form-control"
+                    placeholder="Tell guests what makes this place special..."
+                    required
+                ><%= listing.description %></textarea>
+            </div>
+
+            <!-- Current Image -->
+            <div class="current-image-box">
+                <p>Current listing image</p>
+
+                <img
+                    src="<%= originalImageUrl %>"
+                    alt="<%= listing.title %>"
+                    class="current-image"
+                >
+            </div>
+
+            <!-- New Image -->
+            <div class="mb-4">
+                <label for="image" class="form-label">
+                    Upload a new image
+                </label>
+
+                <input
+                    id="image"
+                    name="listing[image]"
+                    type="file"
+                    class="form-control"
+                    accept="image/png, image/jpeg, image/jpg"
+                >
+
+                <div class="upload-note">
+                    Leave this empty if you want to keep the current image.
+                </div>
+            </div>
+
+            <!-- Price + Country -->
+            <div class="row">
+
+                <div class="mb-4 col-md-4">
+                    <label for="price" class="form-label">
+                        Price per night
+                    </label>
+
+                    <input
+                        id="price"
+                        name="listing[price]"
+                        value="<%= listing.price %>"
+                        type="number"
+                        class="form-control"
+                        min="0"
+                        required
+                    >
+                </div>
+
+                <div class="mb-4 col-md-8">
+                    <label for="country" class="form-label">
+                        Country
+                    </label>
+
+                    <input
+                        id="country"
+                        name="listing[country]"
+                        value="<%= listing.country %>"
+                        type="text"
+                        class="form-control"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <!-- Location -->
+            <div class="mb-4">
+                <label for="location" class="form-label">
+                    Location
+                </label>
+
+                <input
+                    id="location"
+                    name="listing[location]"
+                    value="<%= listing.location %>"
+                    type="text"
+                    class="form-control"
+                    placeholder="City, State"
+                    required
+                >
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-dark edit-btn">
+                Save changes
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+<script src="/js/script.js"></script>
