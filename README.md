@@ -1,24 +1,28 @@
-# 🏠 Airbnb Clone - Wanderlust
+# 🏠 StayNest
 
-A full-stack Airbnb-inspired web application built using **Node.js, Express.js, MongoDB, and EJS**.
-Users can explore listings, create new properties, upload images, add reviews, and manage their accounts.
+A full-stack Airbnb-inspired stay listing web application built with **Node.js, Express.js, MongoDB, and EJS**.
+
+StayNest allows users to explore properties, create and manage listings, upload images, write reviews, and securely manage their accounts.
 
 ## 🚀 Live Demo
 
-(Add your deployed link here)
+Coming soon.
 
 ---
 
-## 📌 Features
+## ✨ Features
 
 * 🔐 User Authentication & Authorization
-* 🏡 Create, Read, Update, Delete (CRUD) Listings
-* 📸 Image Upload using Cloudinary
-* ⭐ Add and Delete Reviews
-* 👤 User Profile Management
+* 🏡 Create, Read, Update, and Delete Listings
+* 📸 Image Upload with Cloudinary
+* ⭐ Ratings and Reviews
+* 👤 User Account Management
 * 🔒 Secure Session Management
-* ⚡ Flash Messages for User Feedback
-* 📱 Responsive UI Design
+* ⚡ Flash Messages
+* 📱 Responsive UI
+* 🏷️ Stay categories and modern listing interface
+* 💰 Listing price and property information
+* ✏️ Edit and delete listing functionality
 
 ---
 
@@ -30,6 +34,7 @@ Users can explore listings, create new properties, upload images, add reviews, a
 * CSS3
 * Bootstrap
 * EJS Templates
+* JavaScript
 
 ### Backend
 
@@ -61,8 +66,8 @@ Users can explore listings, create new properties, upload images, add reviews, a
 
 ## 📂 Project Structure
 
-```
-airbnbproj
+```text
+StayNest
 │
 ├── controllers
 ├── models
@@ -70,12 +75,13 @@ airbnbproj
 ├── views
 ├── public
 ├── utils
-├── uploads
 ├── init
+├── classroom
 │
 ├── app.js
 ├── cloudconfig.js
 ├── middleware.js
+├── schema.js
 ├── package.json
 └── .env
 ```
@@ -84,62 +90,67 @@ airbnbproj
 
 ## ⚙️ Installation & Setup
 
-### Clone Repository
+### 1. Clone the Repository
 
 ```bash
-
-git clone https://github.com/yash0117/Wanderlust-Airbnb-Clone.git
-
+git clone https://github.com/krishnatreyvansh2005/StayNest.git
 ```
 
-### Go to Project Directory
+### 2. Go to the Project Directory
 
 ```bash
-cd airbnbproj
+cd StayNest
 ```
 
-### Install Dependencies
+### 3. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### Setup Environment Variables
+### 4. Configure Environment Variables
 
-Create a `.env` file:
+Create a `.env` file in the project root:
 
-```
+```env
+ATLASDB_URL=your_mongodb_connection_string
 CLOUD_NAME=your_cloudinary_name
 CLOUD_API_KEY=your_cloudinary_api_key
 CLOUD_API_SECRET=your_cloudinary_secret
 SECRET=your_session_secret
 ```
 
----
-
-## ▶️ Run Project
-
-Start the server:
+### 5. Run the Application
 
 ```bash
 npm start
 ```
 
+The application will run locally at:
 
+```text
+http://localhost:8080
+```
+
+---
 
 ## 📸 Screenshots
 
-### Home Page
+### StayNest Home Page
 
 <img src="./Screenshot 2026-07-30 015421.png" width="800"/>
 
+---
+
 ## 🔮 Future Improvements
 
-* Payment Gateway Integration
-* Map Integration
-* Advanced Search Filters
-* Wishlist Feature
-* Deployment on Cloud Platform
+* 💳 Payment Gateway Integration
+* 🗺️ Interactive Maps
+* 🔎 Advanced Search and Filtering
+* ❤️ Wishlist / Favorites
+* 📍 Location-based Search
+* ☁️ Cloud Deployment
+* 📱 Further Mobile UI Improvements
 
 ---
 
@@ -150,11 +161,15 @@ npm start
 B.Tech Computer Science Engineering
 
 GitHub:
-https://github.com/yash0117
+https://github.com/krishnatreyvansh2005
 
 LinkedIn:
-https://www.linkedin.com/in/yash-arya-27003828b/
+https://linkedin.com/in/vansh-krishnatrey
 
----
+🙏 Acknowledgement
 
-⭐ If you like this project, give it a star!
+This project was developed by customizing and extending an existing Airbnb-style project structure. The original project was created by Yash Arya.
+
+The current version includes customized StayNest branding, UI, layouts, rating interface, and other modifications.
+
+⭐ If you find StayNest useful, consider giving the repository a star!
