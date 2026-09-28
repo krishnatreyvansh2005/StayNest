@@ -166,10 +166,5 @@ https://github.com/krishnatreyvansh2005
 LinkedIn:
 https://linkedin.com/in/vansh-krishnatrey
 
-🙏 Acknowledgement
-
-This project was developed by customizing and extending an existing Airbnb-style project structure. The original project was created by Yash Arya.
-
-The current version includes customized StayNest branding, UI, layouts, rating interface, and other modifications.
 
 ⭐ If you find StayNest useful, consider giving the repository a star!
