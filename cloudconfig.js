@@ -10,7 +10,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
-        folder: 'staynest_DEV',
+        folder: 'StayNest_DEV',
         allowed_formats: ["png", "jpg", "jpeg"],
     },
 });
