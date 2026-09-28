@@ -8,10 +8,12 @@ const listingSchema = new Schema({
         required: true,
     },
     description: String,
-    image: {
-       url: String,
-       filename: String,
-    },
+    images: [
+        {
+            url: String,
+            filename: String,
+        }
+    ],
     price: {
         type: Number,
         required: true,
@@ -33,8 +35,8 @@ const listingSchema = new Schema({
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {
-    if(listing) {
-        await review.deleteMany({_id : {$in: listing.reviews}});
+    if (listing) {
+        await review.deleteMany({ _id: { $in: listing.reviews } });
     }
 });
 

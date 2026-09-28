@@ -58,21 +58,86 @@
 
     .current-image-box p {
         font-weight: 600;
-        margin-bottom: 12px;
+        margin-bottom: 15px;
     }
 
-    .current-image {
-        width: 220px;
-        height: 150px;
-        object-fit: cover;
+    .image-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 14px;
+    }
+
+    .image-card {
+        position: relative;
         border-radius: 12px;
+        overflow: hidden;
+        aspect-ratio: 1 / 1;
+        background: #eee;
+        border: 1px solid #ddd;
+    }
+
+    .image-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         display: block;
+    }
+
+    .image-number {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 20px;
+    }
+
+    .upload-box {
+        border: 2px dashed #ddd;
+        border-radius: 12px;
+        padding: 15px;
+        background: #fafafa;
     }
 
     .upload-note {
         font-size: 13px;
         color: #6b7280;
         margin-top: 7px;
+    }
+
+    .new-image-preview {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 12px;
+        margin-top: 15px;
+    }
+
+    .preview-item {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        aspect-ratio: 1 / 1;
+        border: 1px solid #ddd;
+    }
+
+    .preview-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .preview-number {
+        position: absolute;
+        top: 7px;
+        left: 7px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-size: 12px;
+        padding: 3px 7px;
+        border-radius: 20px;
     }
 
     .edit-btn {
@@ -90,6 +155,7 @@
     }
 
     @media (max-width: 768px) {
+
         .edit-page {
             margin: 25px 15px 50px;
         }
@@ -98,9 +164,8 @@
             padding: 20px;
         }
 
-        .current-image {
-            width: 100%;
-            height: 200px;
+        .image-grid {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 </style>
@@ -108,8 +173,13 @@
 <div class="edit-page">
 
     <div class="edit-header">
+
         <h2>Edit your stay</h2>
-        <p>Update your property details and keep your listing fresh.</p>
+
+        <p>
+            Update your property details and keep your listing fresh.
+        </p>
+
     </div>
 
     <div class="edit-card">
@@ -123,8 +193,12 @@
         >
 
             <!-- Title -->
+
             <div class="mb-4">
-                <label for="title" class="form-label">Listing title</label>
+
+                <label for="title" class="form-label">
+                    Listing title
+                </label>
 
                 <input
                     id="title"
@@ -135,11 +209,16 @@
                     placeholder="Give your stay a name"
                     required
                 >
+
             </div>
 
             <!-- Description -->
+
             <div class="mb-4">
-                <label for="description" class="form-label">Description</label>
+
+                <label for="description" class="form-label">
+                    Description
+                </label>
 
                 <textarea
                     id="description"
@@ -148,42 +227,88 @@
                     placeholder="Tell guests what makes this place special..."
                     required
                 ><%= listing.description %></textarea>
+
             </div>
 
-            <!-- Current Image -->
+            <!-- Existing Images -->
+
             <div class="current-image-box">
-                <p>Current listing image</p>
 
-                <img
-                    src="<%= originalImageUrl %>"
-                    alt="<%= listing.title %>"
-                    class="current-image"
-                >
+                <p>
+                    Current listing photos
+                </p>
+
+                <% if (listing.images && listing.images.length > 0) { %>
+
+                    <div class="image-grid">
+
+                        <% listing.images.forEach((image, index) => { %>
+
+                            <div class="image-card">
+
+                                <img
+                                    src="<%= image.url %>"
+                                    alt="<%= listing.title %> photo <%= index + 1 %>"
+                                >
+
+                                <span class="image-number">
+                                    <%= index + 1 %>
+                                </span>
+
+                            </div>
+
+                        <% }) %>
+
+                    </div>
+
+                <% } else { %>
+
+                    <p class="text-muted mb-0">
+                        No photos uploaded yet.
+                    </p>
+
+                <% } %>
+
             </div>
 
-            <!-- New Image -->
+            <!-- Add New Images -->
+
             <div class="mb-4">
-                <label for="image" class="form-label">
-                    Upload a new image
+
+                <label for="images" class="form-label">
+                    Add more photos
                 </label>
 
-                <input
-                    id="image"
-                    name="listing[image]"
-                    type="file"
-                    class="form-control"
-                    accept="image/png, image/jpeg, image/jpg"
-                >
+                <div class="upload-box">
 
-                <div class="upload-note">
-                    Leave this empty if you want to keep the current image.
+                    <input
+                        id="images"
+                        name="listing[images]"
+                        type="file"
+                        class="form-control"
+                        accept="image/png, image/jpeg, image/jpg"
+                        multiple
+                    >
+
+                    <div class="upload-note">
+                        You can add up to 10 photos at a time.
+                    </div>
+
+                    <div
+                        id="newImagePreview"
+                        class="new-image-preview"
+                    ></div>
+
                 </div>
+
             </div>
 
             <!-- Price + Country -->
+
             <div class="row">
 
                 <div class="mb-4 col-md-4">
+
                     <label for="price" class="form-label">
                         Price per night
                     </label>
@@ -197,9 +322,11 @@
                         min="0"
                         required
                     >
+
                 </div>
 
                 <div class="mb-4 col-md-8">
+
                     <label for="country" class="form-label">
                         Country
                     </label>
@@ -212,12 +339,15 @@
                         class="form-control"
                         required
                     >
+
                 </div>
 
             </div>
 
             <!-- Location -->
+
             <div class="mb-4">
+
                 <label for="location" class="form-label">
                     Location
                 </label>
@@ -231,16 +361,76 @@
                     placeholder="City, State"
                     required
                 >
+
             </div>
 
             <!-- Submit -->
-            <button type="submit" class="btn btn-dark edit-btn">
+
+            <button
+                type="submit"
+                class="btn btn-dark edit-btn"
+            >
                 Save changes
             </button>
 
         </form>
 
     </div>
+
 </div>
+
+<script>
+
+    const imageInput = document.getElementById("images");
+
+    const imagePreview = document.getElementById("newImagePreview");
+
+    imageInput.addEventListener("change", function () {
+
+        imagePreview.innerHTML = "";
+
+        const files = Array.from(this.files);
+
+        if (files.length > 10) {
+
+            alert("You can add a maximum of 10 photos at a time.");
+
+            this.value = "";
+
+            return;
+        }
+
+        files.forEach((file, index) => {
+
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+
+                const previewItem = document.createElement("div");
+
+                previewItem.className = "preview-item";
+
+                previewItem.innerHTML = `
+                    <img
+                        src="${event.target.result}"
+                        alt="New property photo ${index + 1}"
+                    >
+
+                    <span class="preview-number">
+                        ${index + 1}
+                    </span>
+                `;
+
+                imagePreview.appendChild(previewItem);
+
+            };
+
+            reader.readAsDataURL(file);
+
+        });
+
+    });
+
+</script>
 
 <script src="/js/script.js"></script>
